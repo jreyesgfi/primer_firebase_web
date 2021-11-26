@@ -13,8 +13,8 @@ import * as Yup from 'yup';
 
 const Login = () => {
   const navigate = useNavigate();
-
-  // const iniciarSesion = async credenciales => {
+  
+   const iniciarSesion = console.log("implementar iniciar sesión")//async credenciales => {
   //   let sesionIniciada = await firebaseIniciarSesion(credenciales.email, credenciales.password);
 
   //   if (sesionIniciada) {

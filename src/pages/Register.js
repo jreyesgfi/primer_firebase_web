@@ -11,7 +11,7 @@ import {
 import { Formik } from 'formik';
 import { Helmet } from 'react-helmet';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { firebaseRegistrarUsuario } from 'src/utils/FirebaseUtil';
+//import { firebaseRegistrarUsuario } from 'src/utils/FirebaseUtil';
 import * as Yup from 'yup';
 
 const Register = () => {
@@ -20,7 +20,7 @@ const Register = () => {
   const registrarUsuario = (usuario) => {
     //firebaseRegistrarUsuario(usuario.email, usuario.password);
     alert("El usuario se registró con éxito.")
-    //navigate('/login', { replace: true });
+    navigate('/login', { replace: true });
   }
 
   return (
@@ -170,6 +170,7 @@ const Register = () => {
                 )}
                 <Box sx={{ py: 2 }}>
                   <Button
+                    onClick ={registrarUsuario}
                     color="primary"
                     disabled={isSubmitting}
                     fullWidth
