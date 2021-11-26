@@ -8,22 +8,19 @@ import {
 import { Formik } from 'formik';
 import { Helmet } from 'react-helmet';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { firebaseIniciarSesion, firebaseRegistrarUsuario } from 'src/utils/FirebaseUtil';
+import { firebaseIniciarSesion} from 'src/utils/FirebaseUtil';
 import * as Yup from 'yup';
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const iniciarSesion = (credenciales) => {
-    firebaseIniciarSesion(credenciales.email, credenciales.password).then((sesionIniciada) => {
-      if (sesionIniciada) {
+  const iniciarSesion = async credenciales => {
+    let sesionIniciada = await firebaseIniciarSesion(credenciales.email, credenciales.password);
+    if (sesionIniciada) {
         navigate('/app/dashboard', { replace: true });
-      } else {
+    } else {
         alert("Algo estuvo mal en el inicio de sesión")
       }
-    });
-
-
   }
 
 

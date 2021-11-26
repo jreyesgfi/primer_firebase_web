@@ -26,19 +26,13 @@ export function firebaseRegistrarUsuario(email, password) {
   });
 }
 
-export function firebaseIniciarSesion(email, password) {
-  signInWithEmailAndPassword(getAuth(), email, password)
+export async function firebaseIniciarSesion(email, password) {
+  try{
+    let credenciales = await signInWithEmailAndPassword(getAuth(),email,password);
+    //credenciales.user
+    return true;
+  }catch(e) {
+    return false;
+  }
 
-  //  Nos registramos en firevase y esperamos la respuesta
-    .then((credenciales) => {
-
-      // Registro correcto
-      const user = credenciales.user;
-      return true;
-      
-    })
-      // Si no conseguimos iniciar sesión...
-    .catch((error) => {
-      return false;
-    });
 }
