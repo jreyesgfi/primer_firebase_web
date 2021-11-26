@@ -20,7 +20,7 @@ const Register = () => {
   const registrarUsuario = (usuario) => {
     firebaseRegistrarUsuario(usuario.email, usuario.password);
     alert("El usuario se registró con éxito.")
-    //navigate('/login', { replace: true });
+    navigate('/login', { replace: true });
   }
 
   return (

@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 
 
 export function firebaseConfig() {
@@ -24,4 +24,21 @@ export function firebaseRegistrarUsuario(email, password) {
   createUserWithEmailAndPassword(getAuth(), email, password).then(credenciales => {
     alert(credenciales);
   });
+}
+
+export function firebaseIniciarSesion(email, password) {
+  signInWithEmailAndPassword(getAuth(), email, password)
+
+  //  Nos registramos en firevase y esperamos la respuesta
+    .then((credenciales) => {
+
+      // Registro correcto
+      const user = credenciales.user;
+      return true;
+      
+    })
+      // Si no conseguimos iniciar sesión...
+    .catch((error) => {
+      return false;
+    });
 }
