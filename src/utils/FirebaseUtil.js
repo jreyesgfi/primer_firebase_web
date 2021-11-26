@@ -1,22 +1,27 @@
-import {initializeApp} from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 
 
-export function firebaseConfig(){
-  const  config= {
+export function firebaseConfig() {
+  const config = {
 
     // Iniciamos la app con los datos en diccionario
-        apiKey: "AIzaSyDBCQmU9UQ_kvDBETqCRJeKe_lAmMzLlZg",
-        authDomain: "sistema-fa054.firebaseapp.com",
-        projectId: "sistema-fa054",
-        storageBucket: "sistema-fa054.appspot.com",
-        messagingSenderId: "769887160696",
-        appId: "1:769887160696:web:38eea942e7de3c49a8e08d",
-        measurementId: "G-1ZNT5BXFKM"
+    apiKey: "AIzaSyAdUOC5TG-QP0TC-XKYnBR6kATHTRGZLQg",
+    authDomain: "webreact-11cd7.firebaseapp.com",
+    projectId: "webreact-11cd7",
+    storageBucket: "webreact-11cd7.appspot.com",
+    messagingSenderId: "22579012522",
+    appId: "1:22579012522:web:f711e8c42a81f24b39c1d3",
+    measurementId: "G-SPFJCP54CV"
   };
 
   const app = initializeApp(config);
   const analytics = getAnalytics(app);
 
 }
- 
+export function firebaseRegistrarUsuario(email, password) {
+  createUserWithEmailAndPassword(getAuth(), email, password).then(credenciales => {
+    alert(credenciales);
+  });
+}
