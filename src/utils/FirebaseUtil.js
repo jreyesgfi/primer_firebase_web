@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { getAnalytics } from 'firebase/analytics';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
+import { collection, getDocs, getFirestore} from 'firebase/firestore';
 
 export function firebaseConfig() {
   const config = {
@@ -34,5 +35,41 @@ export async function firebaseIniciarSesion(email, password) {
   }catch(e) {
     return false;
   }
+
+  // signInWithEmailAndPassword(getAuth(), email, password)
+
+  // //  Nos registramos en firebase y esperamos la respuesta
+  //   .then((credenciales) => {
+
+  //     // Registro correcto
+  //     const user = credenciales.user;
+  //     return true;
+      
+  //   })
+  //     // Si no conseguimos iniciar sesión...
+  //   .catch((error) => {
+  //     return false;
+  //   });
+}
+
+export async function firebaseBuscar(coleccionABuscar){
+
+  // Creamos la lista de usuarios
+  let listado = [];
+
+  // Preparamos la consulta
+  let consulta = collection(getFirestore(), coleccionABuscar);
+
+  // Ejetumos la consulta
+  let resultado = await getDocs(consulta);
+
+  // Cambiamos el formato del resultado
+  resultado.forEach(documento => {
+    let objeto = documento.data()
+    objeto.id = documento.id;
+    listado.push(objeto)
+  })
+
+  return listado
 
 }
