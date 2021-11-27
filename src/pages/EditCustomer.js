@@ -35,14 +35,14 @@ import {
                 email: '',
                 firstName: '',
                 lastName: '',
-                telefono: ''
+                telefono: '',
               }}
               validationSchema={
                 Yup.object().shape({
                   email: Yup.string().email('No es una cuenta de correo válida').max(255).required('El correo es necesario'),
                   firstName: Yup.string().max(255).required('El nombre es necesario'),
                   lastName: Yup.string().max(255).required('El apellido es necesario'),
-                  telefono: Yup.number().max(255).required('Introduce un número de teléfono')
+                  telefono: Yup.string().email('No es una cuenta de correo válida').max(255).required('El correo es necesario'),
                 })
               }
               onSubmit={(usuario) => {
@@ -56,7 +56,8 @@ import {
                 isSubmitting,
                 touched,
                 values
-              }) => (
+              }) => { console.log(values)
+                return (
                 <form onSubmit={handleSubmit}>
                   <Box sx={{ mb: 3 }}>
                     <Typography
@@ -77,7 +78,7 @@ import {
                     error={Boolean(touched.firstName && errors.firstName)}
                     fullWidth
                     helperText={touched.firstName && errors.firstName}
-                    label="First name"
+                    label="Nombre"
                     margin="normal"
                     name="firstName"
                     onBlur={handleBlur}
@@ -89,7 +90,7 @@ import {
                     error={Boolean(touched.lastName && errors.lastName)}
                     fullWidth
                     helperText={touched.lastName && errors.lastName}
-                    label="Last name"
+                    label="Apellido"
                     margin="normal"
                     name="lastName"
                     onBlur={handleBlur}
@@ -111,15 +112,14 @@ import {
                     variant="outlined"
                   />
                   <TextField
-                    error={Boolean(touched.email && errors.email)}
+                    error={Boolean(touched.telefono && errors.telefono)}
                     fullWidth
-                    helperText={Boolean(touched.email && errors.email)}
+                    helperText={errors.telefono}
                     label="Móvil"
                     margin="normal"
                     name="telefono"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    type="int"
                     value={values.telefono}
                     variant="outlined"
                   />
@@ -136,7 +136,7 @@ import {
                     </Button>
                   </Box>
                 </form>
-              )}
+                 )}}
             </Formik>
           </Container>
         </Box>
