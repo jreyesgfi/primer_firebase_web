@@ -1,5 +1,4 @@
 import { Box, Container } from '@material-ui/core';
-import { useEffect } from 'react';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { firebaseBuscar } from 'src/utils/FirebaseUtil';
@@ -19,7 +18,7 @@ const CustomerList = () => {
 
     const buscarClientes = async () => {
         let usuarios = await firebaseBuscar('usuarios')
-        setClientes(resultado);
+        setUsuarios(usuarios);
     }
 
 

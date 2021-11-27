@@ -79,13 +79,13 @@ const CustomerListResults = ({ customers, ...rest }) => {
                   />
                 </TableCell>
                 <TableCell>
-                  Name
+                  Nombre
                 </TableCell>
                 <TableCell>
-                  Email
+                  Correo
                 </TableCell>
                 <TableCell>
-                  Phone
+                  Móvil
                 </TableCell>
               </TableRow>
             </TableHead>
