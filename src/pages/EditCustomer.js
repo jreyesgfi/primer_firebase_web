@@ -7,145 +7,150 @@ import {
     Link,
     TextField,
     Typography
-  } from '@material-ui/core';
-  import { Formik } from 'formik';
-  import { Helmet } from 'react-helmet';
-  import { Link as RouterLink, useNavigate } from 'react-router-dom';
-  import { firebaseRegistrarUsuario } from 'src/utils/FirebaseUtil';
-  import * as Yup from 'yup';
-  
-  const EditCustomer = () => {
+} from '@material-ui/core';
+import { Formik } from 'formik';
+import { Helmet } from 'react-helmet';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { firebaseRegistrarUsuario } from 'src/utils/FirebaseUtil';
+import * as Yup from 'yup';
+
+const EditCustomer = () => {
     return (
-      <>
-        <Helmet>
-          <title>Register | Material Kit</title>
-        </Helmet>
-        <Box
-          sx={{
-            backgroundColor: 'background.default',
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100%',
-            justifyContent: 'center'
-          }}
-        >
-          <Container maxWidth="sm">
-            <Formik
-              initialValues={{
-                email: '',
-                firstName: '',
-                lastName: '',
-                telefono: '',
-              }}
-              validationSchema={
-                Yup.object().shape({
-                  email: Yup.string().email('No es una cuenta de correo válida').max(255).required('El correo es necesario'),
-                  firstName: Yup.string().max(255).required('El nombre es necesario'),
-                  lastName: Yup.string().max(255).required('El apellido es necesario'),
-                  telefono: Yup.string().email('No es una cuenta de correo válida').max(255).required('El correo es necesario'),
-                })
-              }
-              onSubmit={(usuario) => {
-              }}
+        <>
+            <Helmet>
+                <title>Register | Material Kit</title>
+            </Helmet>
+            <Box
+                sx={{
+                    backgroundColor: 'background.default',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    justifyContent: 'center'
+                }}
             >
-              {({
-                errors,
-                handleBlur,
-                handleChange,
-                handleSubmit,
-                isSubmitting,
-                touched,
-                values
-              }) => { console.log(values)
-                return (
-                <form onSubmit={handleSubmit}>
-                  <Box sx={{ mb: 3 }}>
-                    <Typography
-                      color="textPrimary"
-                      variant="h2"
+                <Container maxWidth="sm">
+                    <Formik
+                        initialValues={{
+                            email: '',
+                            firstName: '',
+                            lastName: '',
+                            telefono: '',
+                        }}
+                        validationSchema={
+                            Yup.object().shape({
+                                email: Yup.string().email('No es una cuenta de correo válida').max(255).required('El correo es necesario'),
+                                firstName: Yup.string().max(255).required('El nombre es necesario'),
+                                lastName: Yup.string().max(255).required('El apellido es necesario'),
+                                telefono: Yup.string().test('len', 'Número de teléfono erróneo', val => (val.length === 9 && val > 0 && val%1 == 0)).required('El número de teléfono también es necesario :D'),
+                            })
+                        }
+                        onSubmit={(usuario) => {
+                        }}
                     >
-                      Registra tus contactos
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      gutterBottom
-                      variant="body2"
-                    >
-                      Añade usuarios para interactuar con ellos
-                    </Typography>
-                  </Box>
-                  <TextField
-                    error={Boolean(touched.firstName && errors.firstName)}
-                    fullWidth
-                    helperText={touched.firstName && errors.firstName}
-                    label="Nombre"
-                    margin="normal"
-                    name="firstName"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.firstName}
-                    variant="outlined"
-                  />
-                  <TextField
-                    error={Boolean(touched.lastName && errors.lastName)}
-                    fullWidth
-                    helperText={touched.lastName && errors.lastName}
-                    label="Apellido"
-                    margin="normal"
-                    name="lastName"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.lastName}
-                    variant="outlined"
-                  />
-                  <TextField
-                    error={Boolean(touched.email && errors.email)}
-                    fullWidth
-                    helperText={touched.email && errors.email}
-                    label="Email Address"
-                    margin="normal"
-                    name="email"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    type="email"
-                    value={values.email}
-                    variant="outlined"
-                  />
-                  <TextField
-                    error={Boolean(touched.telefono && errors.telefono)}
-                    fullWidth
-                    helperText={errors.telefono}
-                    label="Móvil"
-                    margin="normal"
-                    name="telefono"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.telefono}
-                    variant="outlined"
-                  />
-                  <Box sx={{ py: 2 }}>
-                    <Button
-                      color="primary"
-                      disabled={isSubmitting}
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                    >
-                      Incorporar usuario
-                    </Button>
-                  </Box>
-                </form>
-                 )}}
-            </Formik>
-          </Container>
-        </Box>
-      </>
+                        {({
+                            errors,
+                            handleBlur,
+                            handleChange,
+                            handleSubmit,
+                            isSubmitting,
+                            touched,
+                            values
+                        }) => {
+                            console.log(touched.telefono)
+                            console.log(values)
+                            console.log(errors)
+                            return (
+                                <form onSubmit={handleSubmit}>
+                                    <Box sx={{ mb: 3 }}>
+                                        <Typography
+                                            color="textPrimary"
+                                            variant="h2"
+                                        >
+                                            Registra tus contactos
+                                        </Typography>
+                                        <Typography
+                                            color="textSecondary"
+                                            gutterBottom
+                                            variant="body2"
+                                        >
+                                            Añade usuarios para interactuar con ellos
+                                        </Typography>
+                                    </Box>
+                                    <TextField
+                                        error={Boolean(touched.firstName && errors.firstName)}
+                                        fullWidth
+                                        helperText={touched.firstName && errors.firstName}
+                                        label="Nombre"
+                                        margin="normal"
+                                        name="firstName"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.firstName}
+                                        variant="outlined"
+                                    />
+                                    <TextField
+                                        error={Boolean(touched.lastName && errors.lastName)}
+                                        fullWidth
+                                        helperText={touched.lastName && errors.lastName}
+                                        label="Apellido"
+                                        margin="normal"
+                                        name="lastName"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.lastName}
+                                        variant="outlined"
+                                    />
+                                    <TextField
+                                        error={Boolean(touched.email && errors.email)}
+                                        fullWidth
+                                        helperText={touched.email && errors.email}
+                                        label="Email Address"
+                                        margin="normal"
+                                        name="email"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        type="email"
+                                        value={values.email}
+                                        variant="outlined"
+                                    />
+                                    <TextField
+                                        error={Boolean(touched.telefono && errors.telefono)}
+                                        fullWidth
+                                        helperText={touched.telefono && errors.telefono}
+                                        label="Móvil"
+                                        margin="normal"
+                                        name="telefono"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.telefono}
+                                        type="number"
+                                        variant="outlined"
+                                    />
+                                    <Box sx={{ py: 2 }}>
+                                        <Button
+                                            color="primary"
+                                            disabled={isSubmitting}
+                                            fullWidth
+                                            size="large"
+                                            type="submit"
+                                            variant="contained"
+                                        >
+                                            Incorporar usuario
+                                        </Button>
+                                    </Box>
+                                </form>
+                            )
+                        }}
+                    </Formik>
+                </Container>
+            </Box>
+        </>
     );
-  };
-  
+};
+
 export default EditCustomer;
-  
+
 // import {
 //   Box,
 //   Button, Container, TextField,
