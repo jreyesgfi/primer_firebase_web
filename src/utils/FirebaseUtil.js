@@ -81,7 +81,7 @@ export function firebaseGuardar(coleccion, objeto) {
   objeto.id = uuid();
 
   // Creamos la referencia que deseamos guardar
-  let referencia = setDoc(doc(getFirestore(),coleccion,uuid));
+  let referencia = doc(getFirestore(),coleccion,objeto.id);
 
   // Lo rellenamos y guardamos
   setDoc(referencia, objeto);

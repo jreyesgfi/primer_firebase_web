@@ -20,8 +20,7 @@ const EditCustomer = () => {
 
     const crearCliente = (cliente) => {
         firebaseGuardar('usuarios', cliente);
-        alert('Cliente añadido con éxito');
-        navigate('/customers', { replace: true });
+        navigate('/app/customers', { replace: true });
     }
 
     return (
