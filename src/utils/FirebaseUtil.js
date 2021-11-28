@@ -4,6 +4,8 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 
 import { doc, collection, getDocs, setDoc, getFirestore} from 'firebase/firestore';
 
+import {uuid} from 'uuidv4';
+
 export function firebaseConfig() {
   const config = {
 
@@ -75,8 +77,12 @@ export async function firebaseBuscar(coleccionABuscar){
 
 export function firebaseGuardar(coleccion, objeto) {
 
+  // Generamos el id que vamos a usar
+  objeto.id = uuid();
+
   // Creamos la referencia que deseamos guardar
-  let referencia = setDoc(doc(getFirestore(),coleccion,objeto.id));
+  let referencia = setDoc(doc(getFirestore(),coleccion,uuid));
+
   // Lo rellenamos y guardamos
   setDoc(referencia, objeto);
 }
