@@ -70,9 +70,9 @@ const EditCustomer = () => {
                         touched,
                         values
                     }) => {
-                        console.log(touched.telefono)
-                        console.log(values)
-                        console.log(errors)
+                        // console.log(touched.telefono)
+                        // console.log(values)
+                        // console.log(errors)
                         return (
                             <form onSubmit={handleSubmit}>
                                 <Box sx={{ mb: 3 }}>

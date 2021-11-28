@@ -14,6 +14,7 @@ import {
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { firebaseEliminar } from 'src/utils/FirebaseUtil';
 
 const CustomerListResults = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -122,15 +123,15 @@ const CustomerListResults = ({ customers, ...rest }) => {
                     {customer.email}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {customer.telefono}
                   </TableCell>
 
                   <TableCell>
                     <Button
                       onClick={() => {
-                        // firebaseEliminar('clientes', customer.id)
-                        alert("El cliente se eliminó con éxito.")
-                        window.location.reload(true);
+                        firebaseEliminar('usuarios', customer.id);
+                        alert("El cliente se eliminó con éxito.");
+                        // window.location.reload(true);
                       }}
                       color="error"
                       variant="contained"

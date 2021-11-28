@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
-import { doc, collection, getDocs, setDoc, getFirestore} from 'firebase/firestore';
+import { doc, collection, getDocs, setDoc, getFirestore, deleteDoc} from 'firebase/firestore';
 
 import {uuid} from 'uuidv4';
 
@@ -85,4 +85,11 @@ export function firebaseGuardar(coleccion, objeto) {
 
   // Lo rellenamos y guardamos
   setDoc(referencia, objeto);
+}
+
+export async function firebaseEliminar(coleccion,id) {
+  console.log("se ha eliminado el usuario", id)
+  await deleteDoc(doc(getFirestore(), coleccion,id)).catch((e)=>{
+    console.log(e);
+  });
 }
