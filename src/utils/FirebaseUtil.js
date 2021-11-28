@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
-import { collection, getDocs, getFirestore} from 'firebase/firestore';
+import { doc, collection, getDocs, setDoc, getFirestore} from 'firebase/firestore';
 
 export function firebaseConfig() {
   const config = {
@@ -71,5 +71,12 @@ export async function firebaseBuscar(coleccionABuscar){
   })
 
   return listado
+}
 
+export function firebaseGuardar(coleccion, objeto) {
+
+  // Creamos la referencia que deseamos guardar
+  let referencia = setDoc(doc(getFirestore(),coleccion,objeto.id));
+  // Lo rellenamos y guardamos
+  setDoc(referencia, objeto);
 }

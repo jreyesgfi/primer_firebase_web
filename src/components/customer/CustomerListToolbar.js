@@ -22,6 +22,7 @@ const CustomerListToolbar = (props) => {
 
       <Button
         onClick={() => {
+          // usamos el hook para navegar
           navigate('/app/customer-new', { replace: true });
         }}
         color="primary"
